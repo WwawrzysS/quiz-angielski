@@ -1187,7 +1187,7 @@
         if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             recognition = new SpeechRecognition();
-            recognition.continuous = true;
+            recognition.continuous = false;
             recognition.interimResults = true;
             recognition.maxAlternatives = 3;
 
@@ -1239,12 +1239,12 @@
             };
 
             recognition.onend = () => {
-    speechEngineStarted = false;
+                speechEngineStarted = false;
 
-    if (speechMicButton && !speechProcessing) {
-        speechMicButton.classList.remove("mic-listening");
-        speechMicButton.disabled = false;
-        speechMicButton.innerText = "Naciśnij i powiedz 🎤";
+                if (speechMicButton && !speechProcessing) {
+                    speechMicButton.classList.remove("mic-listening");
+                    speechMicButton.disabled = false;
+                    speechMicButton.innerText = "Naciśnij i powiedz 🎤";
                 }
             };
         }
@@ -2832,7 +2832,17 @@ ${modeName} - Etap ${currentStage} / ${maxStages}`;
             });
         }
     </script>
-    <script src="./apk-fix.js"></script>
+    <script>
+        // Ładuj apk-fix.js tylko w prawdziwej aplikacji APK/Capacitor.
+        // GitHub Pages / WWW / PWA nie ładuje tego pliku, więc używa mikrofonu przeglądarki.
+        (function () {
+            if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+                const script = document.createElement("script");
+                script.src = "./apk-fix.js?v=6";
+                document.body.appendChild(script);
+            }
+        })();
+    </script>
 
 </body>
 </html>
