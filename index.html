@@ -1239,10 +1239,12 @@
             };
 
             recognition.onend = () => {
-                // Chrome potrafi sam zakończyć rozpoznawanie po ciszy.
-                // Restartujemy tylko, gdy nadal jesteśmy w trybie Powiedz i nie trwa ocenianie odpowiedzi.
-                if ((activeCategory === 'powiedz' || activeCategory === 'dialogi') && speechEngineStarted && !speechProcessing) {
-                    try { recognition.start(); } catch (e) {}
+    speechEngineStarted = false;
+
+    if (speechMicButton && !speechProcessing) {
+        speechMicButton.classList.remove("mic-listening");
+        speechMicButton.disabled = false;
+        speechMicButton.innerText = "Naciśnij i powiedz 🎤";
                 }
             };
         }
