@@ -1,9 +1,13 @@
-# Quiz Angielski PRO — GitHub Clean
+# Quiz Angielski PRO — split-v1
 
-Wgraj te pliki do repozytorium GitHub `quiz-angielski` przez Add file → Upload files.
+To jest ta sama sprawdzona wersja quizu, tylko podzielona na mniejsze pliki:
 
-Najważniejsze zmiany:
-- GitHub/WWW/PWA nie ładuje `apk-fix.js`, więc nie pokazuje błędu „Brak wtyczki mikrofonu w APK”.
-- Mikrofon przeglądarki działa jednorazowo po kliknięciu — bez automatycznego restartu ON/OFF.
-- `service-worker.js` czyści stare cache, żeby telefon pobrał świeżą wersję.
-- `apk-fix.js` zostaje dla lokalnego projektu APK i uruchamia się tylko w Capacitor/APK.
+- `index.html` — szkielet strony i podpięcia plików
+- `style.css` — cały wygląd
+- `skrypt.js` — logika gry + obecna baza danych
+- `manifest.json` — PWA
+- `service-worker.js` — bezpieczniejszy cache dla GitHub Pages
+- `apk-fix.js` — plik pomocniczy dla APK
+- `pobierz.html` — strona pobierania APK
+
+Na tym etapie nie rozdzielałem jeszcze `baza.js`, żeby nie ryzykować błędów w działającej grze. Następny krok może być: wydzielić bazę danych ze `skrypt.js` do `baza.js`.
