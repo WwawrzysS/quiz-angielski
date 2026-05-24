@@ -920,3 +920,934 @@ button.wrong {
         animation: none !important;
     }
 }
+
+/* ==========================================================
+   EKRAN STARTOWY V2 — lekki lifting, podróżnicze tło, bez zmiany logiki
+   ========================================================== */
+
+.start-screen-v2 {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 16% 12%, rgba(255,255,255,0.98) 0 0, rgba(255,255,255,0.98) 42px, transparent 43px),
+        radial-gradient(circle at 90% 18%, rgba(255,255,255,0.72) 0 0, rgba(255,255,255,0.72) 28px, transparent 29px),
+        linear-gradient(180deg, rgba(238,249,255,0.98) 0%, rgba(255,255,255,0.98) 58%, rgba(239,253,244,0.98) 100%);
+    border: 4px solid rgba(255,255,255,0.72);
+    box-shadow: 0 34px 90px rgba(15, 23, 42, 0.32), inset 0 1px 0 rgba(255,255,255,0.85);
+}
+
+.start-screen-v2::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background:
+        radial-gradient(circle at 0% 0%, rgba(250,204,21,0.34) 0 0, transparent 13%),
+        radial-gradient(circle at 100% 100%, rgba(34,197,94,0.18) 0 0, transparent 20%),
+        linear-gradient(135deg, rgba(14,165,233,0.20), rgba(34,197,94,0.10));
+}
+
+.start-screen-v2::after {
+    content: "";
+    position: absolute;
+    left: -8%;
+    right: -8%;
+    bottom: -10%;
+    height: 30%;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse at 35% 110%, rgba(34,197,94,0.34) 0 0, transparent 58%),
+        radial-gradient(ellipse at 75% 100%, rgba(20,184,166,0.20) 0 0, transparent 54%);
+    filter: blur(0.2px);
+}
+
+.start-screen-v2 h2 {
+    margin-bottom: 18px;
+    font-size: clamp(2.1rem, 4vw, 3rem);
+    line-height: 0.95;
+    color: #ffffff;
+    letter-spacing: -0.055em;
+    text-shadow:
+        0 3px 0 #2563eb,
+        0 7px 0 rgba(29,78,216,0.18),
+        0 18px 32px rgba(15,71,120,0.22);
+}
+
+.start-brand-card {
+    display: grid;
+    gap: 4px;
+    text-align: left;
+    background: rgba(255,255,255,0.94);
+    border: 1px solid rgba(219,231,243,0.92);
+    box-shadow: 0 14px 30px rgba(15, 71, 120, 0.10);
+}
+
+.start-brand-subtitle {
+    display: block;
+    font-weight: 800;
+    color: #475569;
+}
+
+.start-adventure-strip {
+    position: relative;
+    min-height: 148px;
+    margin: 0 0 16px;
+}
+
+.start-hero-card {
+    position: absolute;
+    inset: 8px 0 0 0;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 24px;
+    overflow: hidden;
+    background:
+        linear-gradient(180deg, rgba(56,189,248,0.28), rgba(255,255,255,0.86)),
+        radial-gradient(circle at 12% 80%, rgba(34,197,94,0.32), transparent 28%),
+        radial-gradient(circle at 92% 20%, rgba(251,191,36,0.22), transparent 24%);
+    border: 1px solid rgba(255,255,255,0.76);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.95), 0 18px 36px rgba(15, 71, 120, 0.12);
+}
+
+.start-hero-card::before {
+    content: "";
+    position: absolute;
+    inset: auto -10% -18% -10%;
+    height: 50%;
+    background:
+        radial-gradient(ellipse at 35% 95%, rgba(34,197,94,0.42) 0 0, transparent 56%),
+        radial-gradient(ellipse at 72% 90%, rgba(16,185,129,0.26) 0 0, transparent 60%);
+    z-index: 0;
+}
+
+.start-hero-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.start-hero-avatars {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.start-avatar {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.86);
+    box-shadow: 0 12px 26px rgba(15, 71, 120, 0.12);
+    font-size: 2rem;
+    animation: softFloatV1 3s ease-in-out infinite;
+}
+
+.start-avatar-girl {
+    margin-left: -10px;
+    animation-delay: 0.7s;
+}
+
+.start-hero-text {
+    text-align: left;
+    display: grid;
+    gap: 2px;
+    color: #0f172a;
+}
+
+.start-hero-text strong {
+    font-size: 1.02rem;
+    font-weight: 950;
+    color: #0f4778;
+}
+
+.start-hero-text span {
+    font-size: 0.84rem;
+    font-weight: 800;
+    color: #475569;
+    line-height: 1.25;
+}
+
+.start-signs {
+    display: grid;
+    gap: 5px;
+    transform: rotate(-3deg);
+}
+
+.start-signs span {
+    display: block;
+    padding: 4px 8px;
+    border-radius: 999px;
+    color: white;
+    font-size: 0.68rem;
+    font-weight: 950;
+    box-shadow: 0 8px 14px rgba(15,23,42,0.12);
+}
+
+.start-signs span:nth-child(1) { background: #f59e0b; }
+.start-signs span:nth-child(2) { background: #22c55e; }
+.start-signs span:nth-child(3) { background: #2563eb; }
+
+.start-sky-object {
+    position: absolute;
+    z-index: 2;
+    filter: drop-shadow(0 8px 12px rgba(15,71,120,0.14));
+    pointer-events: none;
+}
+
+.start-sun {
+    left: 4px;
+    top: -10px;
+    font-size: 2.1rem;
+    animation: softFloatV1 3.8s ease-in-out infinite;
+}
+
+.start-balloon {
+    left: 76px;
+    top: -4px;
+    font-size: 1.8rem;
+    animation: softFloatV1 4.2s ease-in-out infinite 0.4s;
+}
+
+.start-plane {
+    right: 14px;
+    top: 8px;
+    font-size: 2rem;
+    transform: rotate(10deg);
+    animation: startPlaneDrift 6s ease-in-out infinite;
+}
+
+@keyframes startPlaneDrift {
+    0%, 100% { transform: translateX(0) rotate(10deg); }
+    50% { transform: translateX(-10px) translateY(4px) rotate(6deg); }
+}
+
+.start-screen-v2 .player-inputs {
+    margin-top: 4px;
+}
+
+.start-screen-v2 .player-field {
+    position: relative;
+    background: rgba(255,255,255,0.80);
+    border: 1px solid rgba(219,231,243,0.90);
+    box-shadow: 0 12px 28px rgba(15,71,120,0.08);
+}
+
+.start-screen-v2 .player-field::before {
+    content: "🎒";
+    position: absolute;
+    right: 14px;
+    top: -18px;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.90);
+    box-shadow: 0 12px 26px rgba(15, 71, 120, 0.10);
+    font-size: 1.45rem;
+}
+
+.start-screen-v2 .player-field:nth-child(2)::before {
+    content: "🧭";
+}
+
+.start-screen-v2 .profiles-summary {
+    background: rgba(255,255,255,0.78);
+    backdrop-filter: blur(8px);
+    border-color: rgba(219,231,243,0.90);
+}
+
+.start-screen-v2 .profile-pill {
+    background: rgba(255,255,255,0.92);
+    border-color: rgba(219,231,243,0.95);
+}
+
+.start-login-btn {
+    border: none;
+    color: white;
+    box-shadow: 0 14px 0 rgba(15,23,42,0.12), 0 22px 36px rgba(15,71,120,0.16);
+}
+
+.start-login-primary {
+    background: linear-gradient(180deg, #38bdf8, #2563eb);
+}
+
+.start-login-secondary {
+    background: linear-gradient(180deg, #4ade80, #16a34a);
+}
+
+.start-login-together {
+    background: linear-gradient(180deg, #fb923c, #f97316);
+}
+
+.start-login-btn:hover:not(:disabled) {
+    color: white;
+    filter: brightness(1.03) saturate(1.08);
+}
+
+.start-extra-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.start-extra-btn {
+    display: grid;
+    place-items: center;
+    min-height: 48px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    text-decoration: none;
+    color: white;
+    font-weight: 950;
+    box-shadow: 0 14px 24px rgba(15,71,120,0.14);
+    transition: transform var(--motion-normal) var(--ease-pop), filter var(--motion-normal) ease, box-shadow var(--motion-normal) ease;
+}
+
+.start-extra-btn:hover {
+    transform: translateY(-2px) scale(1.01);
+    filter: brightness(1.04) saturate(1.08);
+}
+
+.start-extra-btn:active {
+    transform: translateY(2px) scale(0.975);
+}
+
+.start-apk-btn {
+    background: linear-gradient(180deg, #fbbf24, #f97316);
+}
+
+.start-mail-btn {
+    background: linear-gradient(180deg, #60a5fa, #2563eb);
+}
+
+@media (max-width: 560px) {
+    .start-screen-v2 {
+        padding: 22px;
+    }
+
+    .start-adventure-strip {
+        min-height: 170px;
+    }
+
+    .start-hero-card {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        gap: 8px;
+        padding: 14px;
+    }
+
+    .start-hero-text {
+        text-align: center;
+    }
+
+    .start-signs {
+        grid-template-columns: repeat(3, auto);
+        transform: none;
+    }
+
+    .start-extra-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================
+   EKRAN STARTOWY V3 — prostszy wybór profilu i naprawa dołu
+   ========================================================== */
+.start-screen-v3 {
+    overflow-y: auto;
+    overflow-x: hidden;
+    justify-content: flex-start;
+    padding-bottom: 34px;
+    scroll-padding-bottom: 34px;
+}
+
+.start-screen-v3 .start-brand-card {
+    margin-top: 0;
+    margin-bottom: 14px;
+    border-radius: 22px;
+}
+
+.start-screen-v3 .start-adventure-strip {
+    min-height: 132px;
+    margin-bottom: 12px;
+}
+
+.start-screen-v3 .start-hero-card {
+    inset: 0;
+    min-height: 126px;
+}
+
+.start-screen-v3 .start-hero-text strong {
+    font-size: clamp(1.1rem, 2.6vw, 1.45rem);
+}
+
+.start-screen-v3 .start-hero-text span {
+    font-size: 0.92rem;
+}
+
+.start-choice-title {
+    margin: 8px 0 10px;
+    color: #0f4778;
+    font-weight: 950;
+    font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+    text-align: center;
+    letter-spacing: -0.02em;
+}
+
+.start-screen-v3 .player-inputs {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.start-screen-v3 .player-field {
+    padding: 14px;
+    border-radius: 22px;
+}
+
+.start-screen-v3 .player-field::before {
+    display: none;
+}
+
+.start-screen-v3 .player-field label {
+    font-size: 0.88rem;
+    margin-bottom: 8px;
+}
+
+.start-screen-v3 .player-name-input {
+    min-height: 48px;
+    font-size: 1.02rem;
+    border-radius: 16px;
+}
+
+.start-screen-v3 .profiles-summary {
+    padding: 8px 10px;
+    margin-bottom: 14px;
+    border-radius: 18px;
+}
+
+/* Na starcie pokazujemy ranking, ale chowamy duże karty profili — ekran jest lżejszy. */
+.start-screen-v3 .profiles-grid {
+    display: none;
+}
+
+.start-screen-v3 .ranking-box {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+    font-size: 0.9rem;
+    white-space: normal;
+}
+
+.start-screen-v3 .start-login-btn {
+    width: 100%;
+    min-height: 56px;
+    margin: 0 0 10px;
+    border-radius: 18px;
+    box-shadow: 0 9px 0 rgba(15,23,42,0.14), 0 16px 28px rgba(15,71,120,0.14);
+}
+
+.start-screen-v3 .start-login-together {
+    margin-bottom: 12px;
+}
+
+.start-screen-v3 .start-extra-actions {
+    margin-top: 2px;
+}
+
+@media (min-width: 760px) {
+    .start-screen-v3 {
+        max-height: calc(100vh - 28px);
+    }
+}
+
+@media (max-width: 560px) {
+    .start-screen-v3 .player-inputs {
+        grid-template-columns: 1fr;
+    }
+
+    .start-screen-v3 .start-adventure-strip {
+        min-height: 156px;
+    }
+
+    .start-screen-v3 .start-login-btn {
+        min-height: 54px;
+    }
+}
+
+/* ==========================================================
+   EKRAN STARTOWY V4 — mniej suwaka, mniej krzykliwe akcje, prostszy wybór
+   ========================================================== */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+.start-screen-v4 {
+    max-height: none;
+    overflow: visible;
+    padding: clamp(18px, 2.4vw, 24px);
+    gap: 10px;
+}
+
+.start-screen-v4 .start-brand-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 10px 14px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    border-radius: 22px;
+}
+
+.start-brand-text {
+    min-width: 0;
+}
+
+.start-screen-v4 .start-brand-subtitle {
+    font-size: 0.9rem;
+}
+
+.start-screen-v4 .start-extra-actions-top {
+    margin: 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.start-screen-v4 .start-extra-btn {
+    min-height: 34px;
+    padding: 7px 11px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    line-height: 1;
+    color: #0f4778;
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(15,71,120,0.12);
+    box-shadow: 0 6px 14px rgba(15,71,120,0.08);
+}
+
+.start-screen-v4 .start-apk-btn,
+.start-screen-v4 .start-mail-btn {
+    background: rgba(255,255,255,0.78);
+}
+
+.start-screen-v4 .start-extra-btn:hover {
+    transform: translateY(-1px);
+    color: #0f4778;
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 8px 18px rgba(15,71,120,0.11);
+}
+
+.start-screen-v4 .start-adventure-strip {
+    min-height: 104px;
+    margin: 0 0 8px;
+}
+
+.start-screen-v4 .start-hero-card {
+    min-height: 100px;
+    padding: 12px 14px;
+    grid-template-columns: auto 1fr auto;
+    border-radius: 22px;
+}
+
+.start-screen-v4 .start-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 16px;
+    font-size: 1.55rem;
+}
+
+.start-screen-v4 .start-hero-text strong {
+    font-size: clamp(1.0rem, 2.1vw, 1.25rem);
+}
+
+.start-screen-v4 .start-hero-text span {
+    font-size: 0.82rem;
+    line-height: 1.22;
+}
+
+.start-screen-v4 .start-signs span {
+    padding: 3px 7px;
+    font-size: 0.62rem;
+}
+
+.start-screen-v4 .start-sun {
+    top: -8px;
+    font-size: 1.75rem;
+}
+
+.start-screen-v4 .start-balloon {
+    left: 70px;
+    top: -1px;
+    font-size: 1.35rem;
+}
+
+.start-screen-v4 .start-plane {
+    right: 18px;
+    top: 12px;
+    font-size: 1.45rem;
+}
+
+.start-screen-v4 .start-choice-title {
+    margin: 4px 0 8px;
+    font-size: clamp(1.05rem, 2.1vw, 1.25rem);
+}
+
+.start-screen-v4 .player-inputs {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.start-screen-v4 .player-field {
+    padding: 10px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.70);
+}
+
+.start-screen-v4 .player-field label {
+    display: none;
+}
+
+.start-screen-v4 .player-name-input {
+    min-height: 42px;
+    border-radius: 14px;
+    font-size: 0.98rem;
+    padding: 10px 12px;
+}
+
+.start-screen-v4 .profiles-summary {
+    padding: 7px 10px;
+    margin-bottom: 10px;
+    border-radius: 16px;
+}
+
+.start-screen-v4 .ranking-box {
+    font-size: 0.84rem;
+    line-height: 1.22;
+}
+
+.start-screen-v4 .start-login-btn {
+    min-height: 48px;
+    margin-bottom: 8px;
+    border-radius: 16px;
+    box-shadow: 0 7px 0 rgba(15,23,42,0.14), 0 12px 22px rgba(15,71,120,0.12);
+}
+
+.start-screen-v4 .start-login-together {
+    margin-bottom: 0;
+}
+
+@media (max-width: 720px) {
+    .start-screen-v4 {
+        padding: 16px;
+    }
+
+    .start-screen-v4 .start-brand-card {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    .start-screen-v4 .start-extra-actions-top {
+        justify-content: stretch;
+    }
+
+    .start-screen-v4 .start-extra-btn {
+        flex: 1;
+    }
+
+    .start-screen-v4 .start-adventure-strip {
+        min-height: 122px;
+    }
+}
+
+@media (max-width: 560px) {
+    .start-screen-v4 .start-hero-card {
+        grid-template-columns: auto 1fr;
+        justify-items: stretch;
+        text-align: left;
+    }
+
+    .start-screen-v4 .start-hero-text {
+        text-align: left;
+    }
+
+    .start-screen-v4 .start-signs {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+        margin-top: 2px;
+    }
+
+    .start-screen-v4 .player-inputs {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ==========================================================
+   EKRAN STARTOWY V5 — dopracowanie: czysto, ranking, bez poświaty
+   ========================================================== */
+
+.start-screen-v5 {
+    width: min(100%, 660px);
+    max-height: none;
+    overflow: visible;
+    padding: clamp(16px, 2vw, 22px);
+    gap: 8px;
+    background:
+        radial-gradient(circle at 12% 10%, rgba(255,255,255,0.92) 0 0, rgba(255,255,255,0.92) 38px, transparent 39px),
+        linear-gradient(180deg, rgba(226, 247, 255, 0.98) 0%, rgba(239, 255, 248, 0.98) 100%);
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.30), inset 0 1px 0 rgba(255,255,255,0.88);
+}
+
+/* Usuwamy dolną zieloną poświatę z wcześniejszych prób. */
+.start-screen-v5::after,
+.start-screen-v5 .start-hero-card::before {
+    display: none;
+}
+
+.start-screen-v5 .start-brand-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8px 12px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border-radius: 22px;
+    background: rgba(255,255,255,0.92);
+}
+
+.start-screen-v5 .lesson-title-small {
+    display: inline-block;
+    font-size: 0.98rem;
+    line-height: 1.15;
+}
+
+.start-screen-v5 .start-brand-subtitle {
+    font-size: 0.82rem;
+    opacity: 0.86;
+}
+
+.start-screen-v5 .start-extra-actions-top {
+    margin: 0;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.start-screen-v5 .start-extra-btn {
+    min-height: 30px;
+    padding: 6px 10px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    line-height: 1;
+    color: #0f4778;
+    background: rgba(255,255,255,0.62);
+    border: 1px solid rgba(15,71,120,0.12);
+    box-shadow: 0 4px 10px rgba(15,71,120,0.06);
+    filter: none;
+}
+
+.start-screen-v5 .start-mail-btn {
+    background: transparent;
+    box-shadow: none;
+    border-color: transparent;
+    opacity: 0.82;
+}
+
+.start-screen-v5 .start-extra-btn:hover {
+    transform: translateY(-1px);
+    background: rgba(255,255,255,0.86);
+    box-shadow: 0 7px 16px rgba(15,71,120,0.09);
+}
+
+.start-screen-v5 .start-adventure-strip {
+    min-height: 96px;
+    margin: 0 0 8px;
+}
+
+.start-screen-v5 .start-hero-card {
+    min-height: 92px;
+    inset: 6px 0 0 0;
+    padding: 11px 14px;
+    grid-template-columns: auto 1fr auto;
+    border-radius: 22px;
+    background:
+        linear-gradient(180deg, rgba(56,189,248,0.23), rgba(255,255,255,0.80)),
+        radial-gradient(circle at 10% 90%, rgba(34,197,94,0.20), transparent 30%);
+}
+
+.start-screen-v5 .start-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 15px;
+    font-size: 1.5rem;
+}
+
+.start-screen-v5 .start-hero-text strong {
+    font-size: clamp(1.0rem, 2vw, 1.24rem);
+}
+
+.start-screen-v5 .start-hero-text span {
+    font-size: 0.80rem;
+    line-height: 1.18;
+}
+
+.start-screen-v5 .start-signs span {
+    padding: 3px 7px;
+    font-size: 0.60rem;
+}
+
+.start-screen-v5 .start-sun {
+    top: -5px;
+    left: 5px;
+    font-size: 1.6rem;
+}
+
+.start-screen-v5 .start-balloon {
+    left: 66px;
+    top: -2px;
+    font-size: 1.25rem;
+}
+
+.start-screen-v5 .start-plane {
+    right: 22px;
+    top: 12px;
+    font-size: 1.35rem;
+}
+
+/* V5: imiona są zapamiętywane, a start pokazuje karty/ranking zamiast osobnego bloku formularza. */
+.start-screen-v5 .start-choice-title,
+.start-screen-v5 .player-inputs {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.start-screen-v5 .profiles-summary {
+    padding: 10px 12px 9px;
+    margin: 2px 0 10px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.74);
+    border: 1px solid rgba(219,231,243,0.92);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 8px 20px rgba(15, 71, 120, 0.07);
+}
+
+.start-screen-v5 .profiles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 9px;
+}
+
+.start-screen-v5 .profile-pill {
+    padding: 10px 12px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.90);
+    box-shadow: 0 6px 16px rgba(15, 71, 120, 0.05);
+}
+
+.start-screen-v5 .profile-name {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+}
+
+.start-screen-v5 .profile-meta {
+    gap: 5px;
+    font-size: 0.74rem;
+}
+
+.start-screen-v5 .profile-meta span {
+    padding: 3px 7px;
+}
+
+.start-screen-v5 .xp-mini-track {
+    height: 7px;
+    margin-top: 7px;
+}
+
+.start-screen-v5 .ranking-box {
+    margin-top: 0;
+    padding-top: 9px;
+    border-top: 1px solid rgba(15,71,120,0.10);
+    font-size: 0.82rem;
+    line-height: 1.18;
+    text-align: center;
+    white-space: normal;
+}
+
+.start-screen-v5 .start-login-btn {
+    min-height: 48px;
+    margin-bottom: 8px;
+    border-radius: 16px;
+    box-shadow: 0 7px 0 rgba(15,23,42,0.13), 0 12px 22px rgba(15,71,120,0.11);
+}
+
+.start-screen-v5 .start-login-together {
+    margin-bottom: 0;
+}
+
+@media (max-width: 720px) {
+    .start-screen-v5 {
+        width: min(100%, 620px);
+        padding: 14px;
+    }
+
+    .start-screen-v5 .start-brand-card {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    .start-screen-v5 .start-extra-actions-top {
+        justify-content: flex-start;
+    }
+
+    .start-screen-v5 .start-adventure-strip {
+        min-height: 110px;
+    }
+
+    .start-screen-v5 .start-hero-card {
+        grid-template-columns: auto 1fr;
+    }
+
+    .start-screen-v5 .start-signs {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+}
+
+@media (max-width: 520px) {
+    .start-screen-v5 .profiles-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .start-screen-v5 .start-login-btn {
+        min-height: 46px;
+        font-size: 0.95rem;
+    }
+}

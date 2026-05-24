@@ -12,27 +12,57 @@
     <link rel="apple-touch-icon" href="./icon-192.png">
     <title>Quiz Angielski PRO</title>
     <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <link rel="stylesheet" href="./styl.css?v=animv1">
+    <link rel="stylesheet" href="./styl.css?v=startv5">
 </head>
 <body>
 
-    <div id="login-screen" class="quiz-container">
-        <h2>Kto dzisiaj trenuje?</h2>
-        <div class="lesson-note lesson-note-start"><span class="lesson-title-small">🇬🇧 Angielski turystyczny PRO</span> Opracował: wawrzys@go2.pl</div>
-        <div class="player-inputs">
+    <div id="login-screen" class="quiz-container start-screen-v2 start-screen-v3 start-screen-v4 start-screen-v5">
+        <div class="lesson-note lesson-note-start start-brand-card">
+            <div class="start-brand-text">
+                <span class="lesson-title-small">🇬🇧 Angielski turystyczny PRO</span>
+                <span class="start-brand-subtitle">Opracował: wawrzys@go2.pl</span>
+            </div>
+            <div class="start-extra-actions start-extra-actions-top">
+                <a class="start-extra-btn start-apk-btn" href="./pobierz.html">📱 Pobierz APK</a>
+                <a class="start-extra-btn start-mail-btn" href="mailto:wawrzys@go2.pl?subject=Uwagi%20do%20Quiz%20Angielski%20PRO">✉️ Wyślij uwagę</a>
+            </div>
+        </div>
+        <div class="start-adventure-strip" aria-hidden="true">
+            <div class="start-sky-object start-sun">☀️</div>
+            <div class="start-sky-object start-balloon">🎈</div>
+            <div class="start-sky-object start-plane">✈️</div>
+            <div class="start-hero-card">
+                <div class="start-hero-avatars">
+                    <span class="start-avatar start-avatar-boy">🧒</span>
+                    <span class="start-avatar start-avatar-girl">👧</span>
+                </div>
+                <div class="start-hero-text">
+                    <strong>Językowa przygoda</strong>
+                    <span>Ćwicz, zdobywaj XP i odkrywaj nowe zwroty.</span>
+                </div>
+                <div class="start-signs">
+                    <span>ŚWIAT</span>
+                    <span>PRZYGODA</span>
+                    <span>WIEDZA</span>
+                </div>
+            </div>
+        </div>
+        <div class="start-choice-title">Wybierz lub wpisz imię</div>
+        <div class="player-inputs start-player-inputs-v3">
             <div class="player-field">
-                <label for="player1-input">👤 Użytkownik 1</label>
-                <input id="player1-input" class="player-name-input" type="text" maxlength="24" placeholder="Użytkownik 1" autocomplete="given-name">
+                <label class="sr-only" for="player1-input">Imię gracza 1</label>
+                <input id="player1-input" class="player-name-input" type="text" maxlength="24" placeholder="Imię gracza 1" autocomplete="given-name">
             </div>
             <div class="player-field">
-                <label for="player2-input">👤 Użytkownik 2</label>
-                <input id="player2-input" class="player-name-input" type="text" maxlength="24" placeholder="Użytkownik 2" autocomplete="given-name">
+                <label class="sr-only" for="player2-input">Imię gracza 2</label>
+                <input id="player2-input" class="player-name-input" type="text" maxlength="24" placeholder="Imię gracza 2" autocomplete="given-name">
             </div>
         </div>
         <div id="profiles-summary" class="profiles-summary"></div>
-        <button type="button" class="btn" id="p1-login-btn" onclick="handleLoginSelect(1)">👤 Gram jako Użytkownik 1</button>
-        <button type="button" class="btn" id="p2-login-btn" onclick="handleLoginSelect(2)">👤 Gram jako Użytkownik 2</button>
-        <button type="button" class="btn" id="shared-login-btn" onclick="handleLoginSelect('both')">👥 Gramy razem</button>
+        <button type="button" class="btn start-login-btn start-login-primary" id="p1-login-btn" onclick="handleLoginSelect(1)">👤 Graj jako Użytkownik 1</button>
+        <button type="button" class="btn start-login-btn start-login-secondary" id="p2-login-btn" onclick="handleLoginSelect(2)">👤 Graj jako Użytkownik 2</button>
+        <button type="button" class="btn start-login-btn start-login-together" id="shared-login-btn" onclick="handleLoginSelect('both')">👥 Graj razem</button>
+
     </div>
 
     <div id="level-screen" class="quiz-container">
@@ -121,6 +151,6 @@
         <button type="button" class="btn" id="stage-btn" onclick="startStage()">Zacznij Etap ➔</button>
         <button type="button" class="btn back-btn" onclick="backToCategories()">⬅ Zmień tryb</button>
     </div>
-    <script src="./skrypt.js?v=animv1"></script>
+    <script src="./skrypt.js?v=startv5"></script>
 </body>
 </html>

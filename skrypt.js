@@ -609,9 +609,9 @@
             const p1Preview = sanitizePlayerName(p1Input ? p1Input.value : player1Name, "Użytkownik 1");
             const p2Preview = sanitizePlayerName(p2Input ? p2Input.value : player2Name, "Użytkownik 2");
 
-            document.getElementById("p1-login-btn").innerText = `👤 Gram jako ${p1Preview}`;
-            document.getElementById("p2-login-btn").innerText = `👤 Gram jako ${p2Preview}`;
-            document.getElementById("shared-login-btn").innerText = `👥 Gramy razem: ${p1Preview} i ${p2Preview}`;
+            document.getElementById("p1-login-btn").innerText = `👤 Graj jako ${p1Preview}`;
+            document.getElementById("p2-login-btn").innerText = `👤 Graj jako ${p2Preview}`;
+            document.getElementById("shared-login-btn").innerText = `👥 Graj razem: ${p1Preview} i ${p2Preview}`;
             renderProfilesSummary();
         }
 
