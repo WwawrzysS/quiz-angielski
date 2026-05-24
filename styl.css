@@ -698,3 +698,225 @@
         transition-duration: 0.01ms !important;
     }
 }
+
+/* ==========================================================
+   ANIMACJE I FEELING GRY V1
+   Bez zmiany logiki quizu — tylko ruch, reakcje i polerka UI.
+   ========================================================== */
+
+:root {
+    --motion-fast: 140ms;
+    --motion-normal: 260ms;
+    --motion-slow: 520ms;
+    --ease-pop: cubic-bezier(.2, 1.15, .35, 1);
+}
+
+@keyframes cardEnterV1 {
+    0% {
+        opacity: 0;
+        transform: translateY(14px) scale(0.985);
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes progressShineV1 {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 220% 50%; }
+}
+
+@keyframes goodFlashV1 {
+    0% { transform: scale(1); box-shadow: 0 0 0 rgba(34, 197, 94, 0); }
+    35% { transform: scale(1.045); box-shadow: 0 0 0 10px rgba(34, 197, 94, 0.18); }
+    100% { transform: scale(1); box-shadow: 0 10px 24px rgba(22, 163, 74, 0.22); }
+}
+
+@keyframes wrongShakeV1 {
+    0%, 100% { transform: translateX(0); }
+    18% { transform: translateX(-7px); }
+    36% { transform: translateX(6px); }
+    54% { transform: translateX(-4px); }
+    72% { transform: translateX(3px); }
+}
+
+@keyframes xpPopV1 {
+    0% { opacity: 0; transform: translateY(10px) scale(0.92); }
+    55% { opacity: 1; transform: translateY(-3px) scale(1.04); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes micListenV1 {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.28), 0 12px 24px rgba(15, 71, 120, 0.16);
+    }
+    50% {
+        transform: scale(1.045);
+        box-shadow: 0 0 0 15px rgba(236, 72, 153, 0), 0 18px 34px rgba(236, 72, 153, 0.20);
+    }
+}
+
+@keyframes softFloatV1 {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+@keyframes titleGlowV1 {
+    0%, 100% { text-shadow: 0 2px 0 rgba(255,255,255,0.55), 0 10px 24px rgba(15,71,120,0.06); }
+    50% { text-shadow: 0 2px 0 rgba(255,255,255,0.75), 0 14px 30px rgba(15,71,120,0.14); }
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 34vmin;
+    height: 34vmin;
+    left: -10vmin;
+    top: -8vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 214, 102, 0.22) 0%, rgba(255, 214, 102, 0.10) 42%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: auto -8vw -12vh -8vw;
+    height: 30vh;
+    background: radial-gradient(ellipse at center, rgba(34,197,94,0.18) 0%, rgba(20,184,166,0.10) 45%, transparent 72%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.quiz-container {
+    animation: cardEnterV1 var(--motion-slow) var(--ease-pop) both;
+}
+
+.quiz-container > h2,
+.quiz-container > h3 {
+    animation: titleGlowV1 3.2s ease-in-out infinite;
+}
+
+.lesson-card,
+.level-btn,
+.btn,
+.score-box,
+.player-field,
+.lesson-note,
+.progress-card,
+.question-box,
+.dialog-card,
+.reward-line {
+    will-change: transform;
+}
+
+.btn,
+.level-btn,
+.lesson-card,
+.option-btn,
+.speaker-btn {
+    transition:
+        transform var(--motion-normal) var(--ease-pop),
+        box-shadow var(--motion-normal) ease,
+        filter var(--motion-normal) ease,
+        background-color var(--motion-fast) ease,
+        border-color var(--motion-fast) ease,
+        color var(--motion-fast) ease;
+}
+
+.btn:hover:not(:disabled),
+.level-btn:hover:not(:disabled),
+.lesson-card:hover,
+.option-btn:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.01);
+}
+
+.btn:active,
+.level-btn:active,
+.lesson-card:active,
+.option-btn:active,
+.speaker-btn:active {
+    transform: translateY(2px) scale(0.975) !important;
+    filter: brightness(0.98) saturate(1.05);
+}
+
+.btn.correct,
+.option-btn.correct,
+button.correct {
+    animation: goodFlashV1 0.55s var(--ease-pop) both;
+}
+
+.btn.wrong,
+.option-btn.wrong,
+button.wrong {
+    animation: wrongShakeV1 0.42s ease both;
+}
+
+.write-input.correct-input {
+    animation: goodFlashV1 0.5s var(--ease-pop) both;
+}
+
+.write-input.wrong-input {
+    animation: wrongShakeV1 0.38s ease both;
+}
+
+.progress-fill {
+    transition: width 0.5s var(--ease-pop);
+    background-size: 220% 100%;
+    animation: progressShineV1 3.4s linear infinite;
+}
+
+.progress-track {
+    overflow: hidden;
+    box-shadow: inset 0 2px 8px rgba(15, 71, 120, 0.08);
+}
+
+.mic-listening,
+.speaker-btn.mic-listening {
+    animation: micListenV1 1.05s ease-in-out infinite !important;
+}
+
+.speaker-btn:not(.mic-listening) {
+    animation: softFloatV1 2.4s ease-in-out infinite;
+}
+
+.reward-line {
+    animation: xpPopV1 0.48s var(--ease-pop) both;
+}
+
+.reward-line:nth-child(2) { animation-delay: 80ms; }
+.reward-line:nth-child(3) { animation-delay: 160ms; }
+
+#profiles-summary,
+#lesson-panel,
+#category-screen,
+#speech-choice-screen,
+#dialog-choice-screen,
+#game-screen,
+#result-screen {
+    animation: cardEnterV1 var(--motion-slow) var(--ease-pop) both;
+}
+
+/* Subtelne ulepszenie czytelności na telefonie po dodaniu animacji */
+@media (max-width: 640px) {
+    .btn:hover:not(:disabled),
+    .level-btn:hover:not(:disabled),
+    .lesson-card:hover,
+    .option-btn:hover:not(:disabled) {
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .speaker-btn:not(.mic-listening),
+    .progress-fill,
+    .quiz-container > h2,
+    .quiz-container > h3 {
+        animation: none !important;
+    }
+}

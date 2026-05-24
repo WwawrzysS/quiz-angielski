@@ -1,13 +1,34 @@
-# Quiz Angielski PRO — split-v1
+# Quiz Angielski PRO — Animacje V1
 
-To jest ta sama sprawdzona wersja quizu, tylko podzielona na mniejsze pliki:
+Ta wersja bazuje na sprawdzonej, podzielonej strukturze projektu.
 
-- `index.html` — szkielet strony i podpięcia plików
-- `style.css` — cały wygląd
-- `skrypt.js` — logika gry + obecna baza danych
+## Pliki
+
+- `index.html` — struktura ekranów
+- `styl.css` — wygląd i animacje
+- `skrypt.js` — logika gry
 - `manifest.json` — PWA
-- `service-worker.js` — bezpieczniejszy cache dla GitHub Pages
-- `apk-fix.js` — plik pomocniczy dla APK
+- `service-worker.js` — obsługa cache/PWA
+- `apk-fix.js` — pomoc dla APK
 - `pobierz.html` — strona pobierania APK
 
-Na tym etapie nie rozdzielałem jeszcze `baza.js`, żeby nie ryzykować błędów w działającej grze. Następny krok może być: wydzielić bazę danych ze `skrypt.js` do `baza.js`.
+## Zmiany w tej wersji
+
+Dodano pierwszą warstwę animacji i lepszego „feelingu gry”:
+
+- miękkie wejście ekranów,
+- efekt kliknięcia przycisków,
+- delikatne podbicie kafelków,
+- animowany pasek postępu,
+- pulsowanie mikrofonu podczas słuchania,
+- zielony błysk przy dobrej odpowiedzi,
+- delikatne potrząśnięcie przy błędzie,
+- lekki efekt nagrody XP.
+
+Nie zmieniono logiki gry, bazy słów, dialogów ani mikrofonu.
+
+## Test
+
+Po wgraniu na GitHub testuj:
+
+`https://wwawrzyss.github.io/quiz-angielski/?v=animv1`
