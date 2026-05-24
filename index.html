@@ -11,14 +11,14 @@
     <link rel="manifest" href="./manifest.json">
     <link rel="apple-touch-icon" href="./icon-192.png">
     <title>Quiz Angielski PRO</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <link rel="stylesheet" href="./style.css?v=split1">
+    <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="./styl.css?v=cssv1">
 </head>
 <body>
 
     <div id="login-screen" class="quiz-container">
         <h2>Kto dzisiaj trenuje?</h2>
-        <div class="lesson-note" style="margin-bottom:18px;"><span class="lesson-title-small">🇬🇧 Angielski turystyczny PRO</span> Opracował: wawrzys@go2.pl</div>
+        <div class="lesson-note lesson-note-start"><span class="lesson-title-small">🇬🇧 Angielski turystyczny PRO</span> Opracował: wawrzys@go2.pl</div>
         <div class="player-inputs">
             <div class="player-field">
                 <label for="player1-input">👤 Użytkownik 1</label>
@@ -37,24 +37,24 @@
 
     <div id="level-screen" class="quiz-container">
         <h2 id="level-welcome-msg">Wybierz materiał</h2>
-        <button type="button" class="btn level-btn" onclick="selectLevel(1)">🌱 Uczę się (proste wakacje)</button>
-        <button type="button" class="btn" style="border-color:#f59e0b; color:#f59e0b;" onclick="selectLevel(2)">🚶 Próbuję (więcej sytuacji)</button>
-        <button type="button" class="btn" style="border-color:#ef4444; color:#ef4444;" onclick="selectLevel(3)">🗣️ Rozmawiam (naturalniej)</button>
-        <button type="button" class="btn" style="border-color:#14b8a6; color:#0f766e; background:#ecfeff; font-weight:900;" onclick="openLessons()">📚 Lekcje z notatek</button>
+        <button type="button" class="btn level-btn btn-green" onclick="selectLevel(1)">🌱 Uczę się (proste wakacje)</button>
+        <button type="button" class="btn btn-orange" onclick="selectLevel(2)">🚶 Próbuję (więcej sytuacji)</button>
+        <button type="button" class="btn btn-red" onclick="selectLevel(3)">🗣️ Rozmawiam (naturalniej)</button>
+        <button type="button" class="btn btn-teal btn-strong" onclick="openLessons()">📚 Lekcje z notatek</button>
         <button type="button" class="btn back-btn" onclick="logout()">⬅ Wróć do graczy</button>
     </div>
 
     <div id="category-screen" class="quiz-container">
         <h2 id="cat-welcome-msg">Wybierz tryb nauki</h2>
-        <button type="button" class="btn" style="border-color:#22c55e; color:#15803d; background:#f0fdf4; font-weight:900;" onclick="selectCategory('daily')">🎯 Dzisiejszy trening</button>
-        <button type="button" class="btn" style="border-color:#f97316; color:#c2410c; background:#fff7ed; font-weight:900;" onclick="selectCategory('trudne')">💪 Trudne słowa</button>
+        <button type="button" class="btn btn-green btn-strong" onclick="selectCategory('daily')">🎯 Dzisiejszy trening</button>
+        <button type="button" class="btn btn-orange btn-strong" onclick="selectCategory('trudne')">💪 Trudne słowa</button>
         <button type="button" class="btn" onclick="selectCategory('slowa')">🔤 Słowa</button>
         <button type="button" class="btn" onclick="selectCategory('zdania')">💬 Zdania</button>
         <button type="button" class="btn" onclick="selectCategory('uzupelnij')">🧩 Uzupełnij</button>
-        <button type="button" class="btn" style="border-color:#0f4778; background:#e8f1ff; font-weight:800;" onclick="selectCategory('napisz')">✍️ Napisz</button>
-        <button type="button" class="btn" style="border-color:#ec4899; color:#ec4899; font-weight:800;" onclick="openSpeechChoice()">🗣 Powiedz</button>
-        <button type="button" class="btn" style="border-color:#9333ea; color:#9333ea; font-weight:800;" onclick="selectCategory('liczby')">🔢 Liczby</button>
-        <button type="button" class="btn" id="sprint-nav-btn" style="border-color:#f59e0b; color:#f59e0b; font-weight:800;" onclick="selectCategory('sprint')">💣 Bombowy Sprint</button>
+        <button type="button" class="btn btn-blue-soft btn-strong" onclick="selectCategory('napisz')">✍️ Napisz</button>
+        <button type="button" class="btn btn-pink btn-strong" onclick="openSpeechChoice()">🗣 Powiedz</button>
+        <button type="button" class="btn btn-purple btn-strong" onclick="selectCategory('liczby')">🔢 Liczby</button>
+        <button type="button" class="btn btn-orange btn-strong" id="sprint-nav-btn" onclick="selectCategory('sprint')">💣 Bombowy Sprint</button>
         <button type="button" class="btn back-btn" onclick="backToLevels()">⬅ Wróć do materiału</button>
     </div>
 
@@ -64,8 +64,8 @@
             <span class="lesson-title-small">Trening wymowy</span>
             Najpierw ćwicz pojedyncze słowa, potem krótkie zdania. Na poziomach „Próbuję” i „Rozmawiam” zdania mają podpowiedzi krok po kroku.
         </div>
-        <button type="button" class="btn" style="border-color:#ec4899; color:#be185d; font-weight:900;" onclick="selectSpeechMode('slowa')">🔤 Powiedz — słowa</button>
-        <button type="button" class="btn" style="border-color:#ec4899; color:#be185d; font-weight:900;" onclick="selectSpeechMode('zdania')">💬 Powiedz — zdania</button>
+        <button type="button" class="btn btn-pink btn-strong" onclick="selectSpeechMode('slowa')">🔤 Powiedz — słowa</button>
+        <button type="button" class="btn btn-pink btn-strong" onclick="selectSpeechMode('zdania')">💬 Powiedz — zdania</button>
         <button type="button" class="btn back-btn" onclick="backToCategories()">⬅ Wróć do trybów</button>
     </div>
 
@@ -75,7 +75,7 @@
             <span class="lesson-title-small">Lekcje są przygotowane z Twoich notatek online.</span>
             Na razie aktywna jest Lekcja 1: wakacyjne pakowanie, pytania „Do you have...?”, „Do you take...?” oraz godziny.
         </div>
-        <button type="button" class="btn" style="border-color:#14b8a6; color:#0f766e; font-weight:900;" onclick="selectLesson(1)">
+        <button type="button" class="btn btn-teal btn-strong" onclick="selectLesson(1)">
             📘 Lekcja 1 — Wakacyjne pakowanie i godziny
             <span class="lesson-btn-subtitle">słowa, proste zdania, godziny, mini-dialogi</span>
         </button>
@@ -110,17 +110,17 @@
         <div class="turn-indicator" id="turn-indicator">Teraz gra: Gracz 1</div>
         <div class="question-box">
             <div class="context-title" id="context-title"></div>
-            <div class="main-question-text" id="main-question-text">Ładowanie...</div>
+            <div class="main-question-text" id="main-question-text" aria-live="polite">Ładowanie...</div>
             <div class="speech-mode-row" id="speech-mode-row">
                 <div class="target-language-text" id="target-language-text"></div>
-                <button type="button" class="speaker-btn" onclick="speakCurrentWord()">🔊</button>
+                <button type="button" class="speaker-btn" aria-label="Odtwórz wymowę" onclick="speakCurrentWord()">🔊</button>
             </div>
-            <div class="speech-preview-box" id="speech-preview"></div>
+            <div class="speech-preview-box" id="speech-preview" aria-live="polite"></div>
         </div>
         <div id="options-container"></div>
         <button type="button" class="btn" id="stage-btn" onclick="startStage()">Zacznij Etap ➔</button>
         <button type="button" class="btn back-btn" onclick="backToCategories()">⬅ Zmień tryb</button>
     </div>
-    <script src="./skrypt.js?v=split1"></script>
+    <script src="./skrypt.js?v=cssv1"></script>
 </body>
 </html>
