@@ -1150,43 +1150,128 @@ ${modeName} - Etap ${currentStage} / ${maxStages}`;
             updateUI();
         }
 
-        function prepareStandardOptions() {
-            const targetText = currentWord[currentLanguage];
-            const options = [targetText];
-            let pool = [];
+        function collectStageMapItems(stageMap) {
+            let items = [];
+            Object.keys(stageMap || {}).forEach(stage => {
+                items = items.concat(stageMap[stage] || []);
+            });
+            return items.filter(item => item && item.pl && item[currentLanguage]);
+        }
+
+        function englishWordCount(text) {
+            return String(text || "").trim().split(/\s+/).filter(Boolean).length;
+        }
+
+        function looksLikeSentenceItem(item) {
+            const text = String((item && item[currentLanguage]) || "").trim();
+            return englishWordCount(text) > 2 || /[?.!]/.test(text);
+        }
+
+        function inferQuestionType(item) {
+            if (activeCategory === 'liczby') return 'number';
+            if (activeCategory === 'slowa' || (activeCategory === 'powiedz' && activeSpeechMode === 'slowa')) return 'word';
+            if (activeCategory === 'zdania' || activeCategory === 'uzupelnij' || activeCategory === 'napisz' || (activeCategory === 'powiedz' && activeSpeechMode === 'zdania')) return 'sentence';
+
+            const text = String((item && item[currentLanguage]) || "").trim();
+            const wc = englishWordCount(text);
+
+            // Tryby mieszane (Dzisiejszy trening / Trudne słowa / Sprint) rozpoznają typ po aktualnym pytaniu.
+            if (wc <= 2 && !/[?.!]/.test(text)) return 'word';
+            return 'sentence';
+        }
+
+        function filterItemsByQuestionType(items, type) {
+            return (items || []).filter(item => {
+                if (!item || !item[currentLanguage]) return false;
+                if (type === 'word') return !looksLikeSentenceItem(item);
+                if (type === 'sentence') return looksLikeSentenceItem(item);
+                return true;
+            });
+        }
+
+        function buildDistractorItemsForCurrentQuestion() {
+            const type = inferQuestionType(currentWord);
             const lvlDB = database[currentLevel] || database[1];
             const numDB = numbersDatabase[currentLevel] || numbersDatabase[1];
+            let pool = [];
+
             if (isLessonMaterial()) {
-                const sourceMap = getLessonStageMap(activeCategory);
-                for (const s in sourceMap) pool = pool.concat(sourceMap[s]);
-                if (pool.length < 4) pool = pool.concat((lessonDatabase[currentLesson] || lessonDatabase[1]).mix);
-            } else if (activeCategory === 'slowa') {
-                for (const s in lvlDB.words) pool = pool.concat(lvlDB.words[s]);
-            } else if (activeCategory === 'zdania') {
-                for (const s in lvlDB.sentences) pool = pool.concat(lvlDB.sentences[s]);
-            } else if (activeCategory === 'liczby') {
-                for (const s in numDB) pool = pool.concat(numDB[s]);
-            } else {
-                if (targetText.trim().includes(" ")) {
-                    for (const s in lvlDB.sentences) pool = pool.concat(lvlDB.sentences[s]);
+                const lesson = lessonDatabase[currentLesson] || lessonDatabase[1];
+                if (type === 'word') {
+                    pool = collectStageMapItems(lesson.wordsStages);
+                } else if (type === 'number') {
+                    pool = collectStageMapItems(lesson.timeStages);
                 } else {
-                    for (const s in lvlDB.words) pool = pool.concat(lvlDB.words[s]);
-                    for (const s in numDB) pool = pool.concat(numDB[s]);
+                    pool = collectStageMapItems(lesson.practiceStages);
                 }
+
+                // Awaryjnie dokładamy materiał tego samego typu z poziomu, żeby nie tworzyć oczywistych pustych odpowiedzi.
+                if (pool.length < 6) {
+                    if (type === 'word') pool = pool.concat(collectStageMapItems(lvlDB.words));
+                    else if (type === 'number') pool = pool.concat(collectStageMapItems(numDB));
+                    else pool = pool.concat(collectStageMapItems(lvlDB.sentences));
+                }
+            } else if (type === 'word') {
+                pool = collectStageMapItems(lvlDB.words);
+                if (activeCategory === 'trudne' || activeCategory === 'daily') {
+                    const difficultWords = getActivePlayers()
+                        .flatMap(p => (loadProfile(p).difficultWords || []))
+                        .map(x => ({pl: x.pl, en: x.en}))
+                        .filter(x => x.pl && x.en);
+                    pool = difficultWords.concat(pool);
+                }
+            } else if (type === 'number') {
+                pool = collectStageMapItems(numDB);
+            } else {
+                pool = collectStageMapItems(lvlDB.sentences);
             }
-            const poolTexts = pool
-                .map(item => item && item[currentLanguage])
+
+            return filterItemsByQuestionType(pool, type);
+        }
+
+        function chooseSmartDistractors(poolTexts, targetText, count = 3) {
+            const target = String(targetText || "");
+            const targetWordCount = englishWordCount(target);
+            const unique = [...new Set((poolTexts || [])
+                .map(t => String(t || "").trim())
                 .filter(Boolean)
-                .filter(item => item !== targetText);
-            while (options.length < 4 && poolTexts.length > 0) {
-                const randomIndex = Math.floor(Math.random() * poolTexts.length);
-                const candidate = poolTexts.splice(randomIndex, 1)[0];
-                if (!options.includes(candidate)) options.push(candidate);
-            }
+                .filter(t => t !== target))];
+
+            // Najpierw wybieramy odpowiedzi podobnego typu i długości, żeby nie były zbyt oczywiste.
+            const ranked = unique
+                .map(text => {
+                    const wc = englishWordCount(text);
+                    const lengthScore = Math.abs(text.length - target.length);
+                    const wordsScore = Math.abs(wc - targetWordCount) * 10;
+                    return { text, score: lengthScore + wordsScore + Math.random() * 6 };
+                })
+                .sort((a, b) => a.score - b.score)
+                .map(x => x.text);
+
+            return ranked.slice(0, count);
+        }
+
+        function prepareStandardOptions() {
+            const targetText = currentWord[currentLanguage];
+            const pool = buildDistractorItemsForCurrentQuestion();
+            const poolTexts = pool.map(item => item && item[currentLanguage]).filter(Boolean);
+            const options = [targetText, ...chooseSmartDistractors(poolTexts, targetText, 3)];
+
+            // Ostateczny bezpiecznik: jeśli w małej lekcji brakuje opcji, dokładamy nadal z tego samego typu pytania.
+            const type = inferQuestionType(currentWord);
             if (options.length < 4) {
-                while (options.length < 4) options.push("...");
+                const fallback = type === 'word'
+                    ? collectStageMapItems((database[currentLevel] || database[1]).words)
+                    : type === 'number'
+                        ? collectStageMapItems(numbersDatabase[currentLevel] || numbersDatabase[1])
+                        : collectStageMapItems((database[currentLevel] || database[1]).sentences);
+                chooseSmartDistractors(fallback.map(item => item && item[currentLanguage]).filter(Boolean), targetText, 6).forEach(candidate => {
+                    if (options.length < 4 && !options.includes(candidate)) options.push(candidate);
+                });
             }
-            renderOptions(options, targetText);
+
+            while (options.length < 4) options.push("—");
+            renderOptions(options.slice(0, 4), targetText);
         }
 
         function renderOptions(opts, correct) {
