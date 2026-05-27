@@ -1,10 +1,10 @@
-const CACHE_NAME = "quiz-angielski-pro-v7";
+const CACHE_NAME = "quiz-angielski-pro-start-v6";
 
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styl.css?v=v7",
-  "./skrypt.js?v=v7",
+  "./styl.css?v=startv6",
+  "./skrypt.js?v=startv6",
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png",
