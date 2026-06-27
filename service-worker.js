@@ -1,11 +1,11 @@
-const CACHE_NAME = "quiz-angielski-petarda-premium-pro-v7";
+const CACHE_NAME = "quiz-angielski-v0-1";
 
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styl.css?v=ppv7",
-  "./skrypt.js?v=ppv7",
-  "./apk-fix.js?v=ppv7",
+  "./styl.css?v=quiz-v01",
+  "./skrypt.js?v=quiz-v01",
+  "./apk-fix.js?v=quiz-v01",
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png",

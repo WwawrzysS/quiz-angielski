@@ -1,7 +1,7 @@
 {
-  "name": "Quiz Angielski — Petarda Premium PRO",
+  "name": "Quiz Angielski PRO",
   "short_name": "Quiz EN PRO",
-  "description": "Quiz do nauki angielskiego: słowa, zdania, uzupełnianie, pisanie i wymowa. Wersja Petarda Premium PRO.",
+  "description": "Quiz do nauki angielskiego: słowa, zdania, uzupełnianie, pisanie i wymowa.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
