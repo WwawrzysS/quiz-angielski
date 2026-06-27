@@ -12,14 +12,14 @@
     <link rel="apple-touch-icon" href="./icon-192.png">
     <title>Quiz Angielski PRO</title>
     <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <link rel="stylesheet" href="./styl.css?v=quiz-v02">
+    <link rel="stylesheet" href="./styl.css?v=quiz-v03">
 </head>
 <body>
 
     <div id="login-screen" class="quiz-container start-screen-v2 start-screen-v3 start-screen-v4 start-screen-v5 start-screen-v6">
         <div class="lesson-note lesson-note-start start-brand-card">
             <div class="start-brand-text">
-                <span class="lesson-title-small">🇬🇧 Angielski turystyczny PRO • Quiz v0.2</span>
+                <span class="lesson-title-small">🇬🇧 Angielski turystyczny PRO • Quiz v0.3</span>
                 <span class="start-brand-subtitle">Opracował: wawrzys@go2.pl</span>
             </div>
             <div class="start-extra-actions start-extra-actions-top">
@@ -78,50 +78,62 @@
         <h2 id="cat-welcome-msg">Wybierz tryb nauki</h2>
         <div class="mode-tiles">
             <button type="button" class="btn mode-tile mode-tile-daily" onclick="selectCategory('daily')">
-                <span class="mode-tile-icon">🎯</span>
-                <span class="mode-tile-text">
-                    <span class="mode-tile-title">Dzisiejszy trening</span>
-                    <span class="mode-tile-subtitle">Ćwicz każdego dnia</span>
+                <span class="mode-tile-row">
+                    <span class="mode-tile-icon">🎯</span>
+                    <span class="mode-tile-text">
+                        <span class="mode-tile-title">Dzisiejszy trening</span>
+                        <span class="mode-tile-subtitle">Ćwicz każdego dnia</span>
+                    </span>
                 </span>
                 <span class="mode-tile-star" aria-hidden="true">⭐</span>
             </button>
             <button type="button" class="btn mode-tile mode-tile-trudne" onclick="selectCategory('trudne')">
-                <span class="mode-tile-icon">💪</span>
-                <span class="mode-tile-text">
-                    <span class="mode-tile-title">Trudne słowa</span>
-                    <span class="mode-tile-subtitle">Podejmij wyzwanie</span>
+                <span class="mode-tile-row">
+                    <span class="mode-tile-icon">💪</span>
+                    <span class="mode-tile-text">
+                        <span class="mode-tile-title">Trudne słowa</span>
+                        <span class="mode-tile-subtitle">Podejmij wyzwanie</span>
+                    </span>
                 </span>
                 <span class="mode-tile-star" aria-hidden="true">⭐</span>
             </button>
             <button type="button" class="btn mode-tile mode-tile-funda" onclick="selectCategory('slowa')">
-                <span class="mode-tile-icon">🧱</span>
-                <span class="mode-tile-text">
-                    <span class="mode-tile-title">Fundamenty</span>
-                    <span class="mode-tile-subtitle">Zbuduj podstawy</span>
+                <span class="mode-tile-row">
+                    <span class="mode-tile-icon">🧱</span>
+                    <span class="mode-tile-text">
+                        <span class="mode-tile-title">Fundamenty</span>
+                        <span class="mode-tile-subtitle">Zbuduj podstawy</span>
+                    </span>
                 </span>
                 <span class="mode-tile-star" aria-hidden="true">⭐</span>
             </button>
             <button type="button" class="btn mode-tile mode-tile-powiedz" onclick="openSpeechChoice()">
-                <span class="mode-tile-icon">🗣</span>
-                <span class="mode-tile-text">
-                    <span class="mode-tile-title">Powiedz</span>
-                    <span class="mode-tile-subtitle">Mów śmiało</span>
+                <span class="mode-tile-row">
+                    <span class="mode-tile-icon">🗣</span>
+                    <span class="mode-tile-text">
+                        <span class="mode-tile-title">Powiedz</span>
+                        <span class="mode-tile-subtitle">Mów śmiało</span>
+                    </span>
                 </span>
                 <span class="mode-tile-star" aria-hidden="true">⭐</span>
             </button>
             <button type="button" class="btn mode-tile mode-tile-dialogi" onclick="selectCategory('zdania')">
-                <span class="mode-tile-icon">🎭</span>
-                <span class="mode-tile-text">
-                    <span class="mode-tile-title">Dialogi</span>
-                    <span class="mode-tile-subtitle">Rozmawiaj jak podróżnik</span>
+                <span class="mode-tile-row">
+                    <span class="mode-tile-icon">🎭</span>
+                    <span class="mode-tile-text">
+                        <span class="mode-tile-title">Dialogi</span>
+                        <span class="mode-tile-subtitle">Rozmawiaj jak podróżnik</span>
+                    </span>
                 </span>
                 <span class="mode-tile-star" aria-hidden="true">⭐</span>
             </button>
             <button type="button" class="btn mode-tile mode-tile-sprint" id="sprint-nav-btn" onclick="selectCategory('sprint')">
-                <span class="mode-tile-icon">💣</span>
-                <span class="mode-tile-text">
-                    <span class="mode-tile-title">Bombowy Sprint</span>
-                    <span class="mode-tile-subtitle">Czasówka pełna emocji</span>
+                <span class="mode-tile-row">
+                    <span class="mode-tile-icon">💣</span>
+                    <span class="mode-tile-text">
+                        <span class="mode-tile-title">Bombowy Sprint</span>
+                        <span class="mode-tile-subtitle">Czasówka pełna emocji</span>
+                    </span>
                 </span>
                 <span class="mode-tile-star" aria-hidden="true">⭐</span>
             </button>
@@ -132,7 +144,7 @@
             <button type="button" class="btn mode-tile-secondary" onclick="selectCategory('napisz')">✍️ Napisz</button>
             <button type="button" class="btn mode-tile-secondary" onclick="selectCategory('liczby')">🔢 Liczby</button>
         </div>
-        <button type="button" class="btn back-btn" onclick="backToLevels()">⬅ Wróć do materiału</button>
+        <button type="button" class="btn back-btn" onclick="backToLevels()">⬅ Zmień poziom</button>
     </div>
 
     <div id="speech-choice-screen" class="quiz-container">
@@ -161,7 +173,7 @@
         <button type="button" class="btn back-btn" onclick="backToLevels()">⬅ Wróć do materiału</button>
     </div>
 
-    <div id="game-screen" class="quiz-container">
+    <div id="game-screen" class="quiz-container game-screen-v2">
         <div class="scoreboard">
             <div id="score-agata" class="score-box">Gracz 1: 0</div>
             <div id="score-darek" class="score-box">Gracz 2: 0</div>

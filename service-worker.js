@@ -1,9 +1,9 @@
-const CACHE_NAME = "quiz-angielski-v0-1";
+const CACHE_NAME = "quiz-angielski-v0-3";
 
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styl.css?v=quiz-v01",
+  "./styl.css?v=quiz-v03",
   "./skrypt.js?v=quiz-v01",
   "./apk-fix.js?v=quiz-v01",
   "./manifest.json",
