@@ -223,6 +223,15 @@
         let speechFinishTimer = null;
         let stageStats = {};
         let lastStageReward = null;
+        let soundEnabled = localStorage.getItem("quiz_sound_enabled") !== "0";
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            localStorage.setItem("quiz_sound_enabled", soundEnabled ? "1" : "0");
+            const btn = document.getElementById("sound-toggle-btn");
+            if (btn) btn.innerText = soundEnabled ? "🔊 Dźwięk" : "🔇 Wyciszone";
+            if (!soundEnabled && 'speechSynthesis' in window) window.speechSynthesis.cancel();
+        }
 
         if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -289,6 +298,7 @@
 
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playSound(isCorrect) {
+            if (!soundEnabled) return;
             if (audioCtx.state === 'suspended') audioCtx.resume();
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
@@ -767,6 +777,7 @@ ${modeName} - Etap ${currentStage} / ${maxStages}`;
         }
 
         function speak(text) {
+            if (!soundEnabled) return;
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
@@ -978,8 +989,9 @@ ${modeName} - Etap ${currentStage} / ${maxStages}`;
                 const selected = validIndexes.slice(0, blanksCount).sort((a,b)=>a.idx-b.idx);
                 clozeSteps = selected.map(s => s.clean);
                 clozeOriginalSentence = targetSentence;
-                clozeCurrentSentence = targetSentence;
-                selected.forEach(s => { clozeCurrentSentence = clozeCurrentSentence.replace(s.clean, "____"); });
+                const blankedWords = [...wordsArray];
+                selected.forEach(s => { blankedWords[s.idx] = blankedWords[s.idx].replace(s.clean, "____"); });
+                clozeCurrentSentence = blankedWords.join(" ");
             }
             document.getElementById("context-title").innerText = currentWord.pl;
             renderClozeStep();
@@ -1070,8 +1082,9 @@ ${modeName} - Etap ${currentStage} / ${maxStages}`;
                 const selected = validIndexes.slice(0, blanksCount).sort((a,b)=>a.idx-b.idx);
                 clozeSteps = selected.map(s=>s.clean);
                 clozeOriginalSentence = targetSentence;
-                clozeCurrentSentence = targetSentence;
-                selected.forEach(s => { clozeCurrentSentence = clozeCurrentSentence.replace(s.clean, "____"); });
+                const blankedWords = [...wordsArray];
+                selected.forEach(s => { blankedWords[s.idx] = blankedWords[s.idx].replace(s.clean, "____"); });
+                clozeCurrentSentence = blankedWords.join(" ");
             }
             document.getElementById("context-title").innerText = currentWord.pl;
             document.getElementById("main-question-text").innerText = clozeCurrentSentence;
@@ -1610,6 +1623,8 @@ ${modeName} - Etap ${currentStage} / ${maxStages}`;
                 p2Input.addEventListener("blur", readAndSavePlayerNames);
             }
             updateLoginScreenButtons();
+            const soundBtn = document.getElementById("sound-toggle-btn");
+            if (soundBtn) soundBtn.innerText = soundEnabled ? "🔊 Dźwięk" : "🔇 Wyciszone";
         });
 
         if ("serviceWorker" in navigator) {

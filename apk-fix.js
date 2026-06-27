@@ -25,6 +25,7 @@
     const NativeTextToSpeech = getPlugin("TextToSpeech");
 
     async function nativeSpeak(text) {
+        if (typeof soundEnabled !== "undefined" && !soundEnabled) return;
         const cleanText = String(text || "").trim();
         if (!cleanText) return;
 

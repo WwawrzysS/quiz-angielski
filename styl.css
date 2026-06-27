@@ -1227,6 +1227,28 @@ button.wrong {
     background: linear-gradient(180deg, #60a5fa, #2563eb);
 }
 
+.start-sound-btn {
+    background: linear-gradient(180deg, #34d399, #059669);
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.pro-badge {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #fbbf24, #f97316);
+    color: #1f2937;
+    font-size: 0.62em;
+    font-weight: 950;
+    letter-spacing: 0.02em;
+    vertical-align: middle;
+    box-shadow: 0 4px 10px rgba(249,115,22,0.35);
+}
+
 @media (max-width: 560px) {
     .start-screen-v2 {
         padding: 22px;
