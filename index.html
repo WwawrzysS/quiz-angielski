@@ -12,14 +12,14 @@
     <link rel="apple-touch-icon" href="./icon-192.png">
     <title>Quiz Angielski PRO</title>
     <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <link rel="stylesheet" href="./styl.css?v=quiz-v01">
+    <link rel="stylesheet" href="./styl.css?v=quiz-v02">
 </head>
 <body>
 
     <div id="login-screen" class="quiz-container start-screen-v2 start-screen-v3 start-screen-v4 start-screen-v5 start-screen-v6">
         <div class="lesson-note lesson-note-start start-brand-card">
             <div class="start-brand-text">
-                <span class="lesson-title-small">🇬🇧 Angielski turystyczny PRO • Quiz v0.1</span>
+                <span class="lesson-title-small">🇬🇧 Angielski turystyczny PRO • Quiz v0.2</span>
                 <span class="start-brand-subtitle">Opracował: wawrzys@go2.pl</span>
             </div>
             <div class="start-extra-actions start-extra-actions-top">
@@ -74,17 +74,64 @@
         <button type="button" class="btn back-btn" onclick="logout()">⬅ Wróć do graczy</button>
     </div>
 
-    <div id="category-screen" class="quiz-container">
+    <div id="category-screen" class="quiz-container category-screen-v2">
         <h2 id="cat-welcome-msg">Wybierz tryb nauki</h2>
-        <button type="button" class="btn btn-green btn-strong" onclick="selectCategory('daily')">🎯 Dzisiejszy trening</button>
-        <button type="button" class="btn btn-orange btn-strong" onclick="selectCategory('trudne')">💪 Trudne słowa</button>
-        <button type="button" class="btn" onclick="selectCategory('slowa')">🔤 Słowa</button>
-        <button type="button" class="btn" onclick="selectCategory('zdania')">💬 Zdania</button>
-        <button type="button" class="btn" onclick="selectCategory('uzupelnij')">🧩 Uzupełnij</button>
-        <button type="button" class="btn btn-blue-soft btn-strong" onclick="selectCategory('napisz')">✍️ Napisz</button>
-        <button type="button" class="btn btn-pink btn-strong" onclick="openSpeechChoice()">🗣 Powiedz</button>
-        <button type="button" class="btn btn-purple btn-strong" onclick="selectCategory('liczby')">🔢 Liczby</button>
-        <button type="button" class="btn btn-orange btn-strong" id="sprint-nav-btn" onclick="selectCategory('sprint')">💣 Bombowy Sprint</button>
+        <div class="mode-tiles">
+            <button type="button" class="btn mode-tile mode-tile-daily" onclick="selectCategory('daily')">
+                <span class="mode-tile-icon">🎯</span>
+                <span class="mode-tile-text">
+                    <span class="mode-tile-title">Dzisiejszy trening</span>
+                    <span class="mode-tile-subtitle">Ćwicz każdego dnia</span>
+                </span>
+                <span class="mode-tile-star" aria-hidden="true">⭐</span>
+            </button>
+            <button type="button" class="btn mode-tile mode-tile-trudne" onclick="selectCategory('trudne')">
+                <span class="mode-tile-icon">💪</span>
+                <span class="mode-tile-text">
+                    <span class="mode-tile-title">Trudne słowa</span>
+                    <span class="mode-tile-subtitle">Podejmij wyzwanie</span>
+                </span>
+                <span class="mode-tile-star" aria-hidden="true">⭐</span>
+            </button>
+            <button type="button" class="btn mode-tile mode-tile-funda" onclick="selectCategory('slowa')">
+                <span class="mode-tile-icon">🧱</span>
+                <span class="mode-tile-text">
+                    <span class="mode-tile-title">Fundamenty</span>
+                    <span class="mode-tile-subtitle">Zbuduj podstawy</span>
+                </span>
+                <span class="mode-tile-star" aria-hidden="true">⭐</span>
+            </button>
+            <button type="button" class="btn mode-tile mode-tile-powiedz" onclick="openSpeechChoice()">
+                <span class="mode-tile-icon">🗣</span>
+                <span class="mode-tile-text">
+                    <span class="mode-tile-title">Powiedz</span>
+                    <span class="mode-tile-subtitle">Mów śmiało</span>
+                </span>
+                <span class="mode-tile-star" aria-hidden="true">⭐</span>
+            </button>
+            <button type="button" class="btn mode-tile mode-tile-dialogi" onclick="selectCategory('zdania')">
+                <span class="mode-tile-icon">🎭</span>
+                <span class="mode-tile-text">
+                    <span class="mode-tile-title">Dialogi</span>
+                    <span class="mode-tile-subtitle">Rozmawiaj jak podróżnik</span>
+                </span>
+                <span class="mode-tile-star" aria-hidden="true">⭐</span>
+            </button>
+            <button type="button" class="btn mode-tile mode-tile-sprint" id="sprint-nav-btn" onclick="selectCategory('sprint')">
+                <span class="mode-tile-icon">💣</span>
+                <span class="mode-tile-text">
+                    <span class="mode-tile-title">Bombowy Sprint</span>
+                    <span class="mode-tile-subtitle">Czasówka pełna emocji</span>
+                </span>
+                <span class="mode-tile-star" aria-hidden="true">⭐</span>
+            </button>
+        </div>
+        <div class="mode-tiles-secondary-label">Więcej trybów</div>
+        <div class="mode-tiles-secondary">
+            <button type="button" class="btn mode-tile-secondary" onclick="selectCategory('uzupelnij')">🧩 Uzupełnij</button>
+            <button type="button" class="btn mode-tile-secondary" onclick="selectCategory('napisz')">✍️ Napisz</button>
+            <button type="button" class="btn mode-tile-secondary" onclick="selectCategory('liczby')">🔢 Liczby</button>
+        </div>
         <button type="button" class="btn back-btn" onclick="backToLevels()">⬅ Wróć do materiału</button>
     </div>
 
