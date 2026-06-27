@@ -2217,58 +2217,94 @@ button.wrong {
 }
 
 /* ==========================================================
-   QUIZ v0.3.1 — HOTFIX: kompaktowy ekran pytania na telefonie
-   Problem: karta pytania, czcionka pytania i odstępy były za duże —
-   dół ekranu (4. odpowiedź / przycisk powrotu) uciekał poza widok.
-   Poniższy blok zastępuje poprzedni, mniej agresywny @media (max-width:480px)
-   dla #game-screen.game-screen-v2 — zero zmian w skrypt.js, zero zmian
-   w display elementów przełączanych przez JS (#options-container zostaje
-   "grid"/"none", #stage-progress-card zostaje "block"/"none").
-   Na desktopie/tablecie (>520px) zostają większe wartości z v0.3.
+   QUIZ v0.3.2 — HOTFIX #2: jeszcze mocniejsza kompresja ekranu
+   pytania na telefonie.
+   Prawdziwa przyczyna ucinania przycisku "⬅ Zmień tryb": baza CSS
+   ma na #game-screen (jako .quiz-container) "max-height: calc(100vh - 40px)"
+   razem z "overflow: hidden" (patrz reguła .quiz-container w tym pliku) —
+   to NIE jest scroll, to twarde przycinanie. Jeśli suma wysokości
+   zawartości przekroczy ten limit, nadmiar po prostu znika z widoku
+   (stąd ucięty dół, a nie pasek przewijania). Dlatego ten hotfix
+   zmniejsza WSZYSTKIE odstępy/czcionki na ekranie pytania, żeby suma
+   wysokości realnie zmieściła się pod tym limitem — zero zmian w
+   skrypt.js, zero zmian w samej regule .quiz-container (dotyczy
+   wszystkich ekranów, więc zostaje nietknięta — poprawka jest
+   scoped wyłącznie do #game-screen.game-screen-v2).
+   Zastępuje poprzedni blok @media (max-width:520px) z v0.3.1.
    ========================================================== */
 @media (max-width: 520px) {
+    /* Mniejszy padding pionowy samego kontenera ekranu pytania */
+    #game-screen.game-screen-v2 {
+        padding-top: 14px;
+        padding-bottom: 14px;
+    }
+
+    /* Pasek wyniku — mniejszy i z mniejszym odstępem pod sobą */
+    #game-screen.game-screen-v2 .scoreboard {
+        padding: 8px 10px;
+        margin-bottom: 6px;
+    }
+    #game-screen.game-screen-v2 .score-box {
+        padding: 6px 8px;
+    }
+    #game-screen.game-screen-v2 .info-bar {
+        margin-bottom: 8px;
+    }
+
+    /* Pasek postępu — mniejszy */
     #game-screen.game-screen-v2 .progress-card {
-        padding: 11px 14px;
+        padding: 10px 12px;
         margin-bottom: 8px;
     }
     #game-screen.game-screen-v2 .progress-track {
-        height: 12px;
+        height: 10px;
     }
+
+    /* Karta pytania — wyraźnie mniejsza.
+       Uwaga: padding zastosowany jako (góra/dół 14px, boki 28px) —
+       odwrotnie niż podana kolejność "28px 14px", bo cel nadrzędny to
+       zmniejszenie WYSOKOŚCI (góra/dół), a nie szerokości. Jeśli to nie
+       to, o co chodziło, daj znać — to jedna linijka do poprawy. */
     #game-screen.game-screen-v2 .question-box {
-        padding: 18px 16px 20px;
-        margin: 4px 0 8px;
+        padding: 14px 28px;
+        margin: 0 0 10px;
         min-height: auto;
     }
     #game-screen.game-screen-v2 .context-title {
-        font-size: 0.88rem;
-        margin-bottom: 6px;
+        font-size: 0.84rem;
+        margin-bottom: 4px;
     }
     #game-screen.game-screen-v2 .main-question-text {
-        font-size: clamp(1.6rem, 7.5vw, 2.3rem);
-        line-height: 1.12;
+        font-size: clamp(28px, 8vw, 34px);
+        line-height: 1.1;
     }
     #game-screen.game-screen-v2 .speaker-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
+        width: 46px;
+        height: 46px;
+        font-size: 18px;
     }
+
+    /* Odpowiedzi — mniejszy odstęp między nimi i mniejsza wysokość przycisków */
     #game-screen.game-screen-v2 #options-container {
-        margin-top: 8px;
-        gap: 12px;
+        margin-top: 0;
+        gap: 10px;
     }
     #game-screen.game-screen-v2 #options-container .btn {
-        padding: 14px 16px;
-        font-size: 0.96rem;
-        border-radius: 16px;
+        padding: 12px 14px;
+        font-size: 0.92rem;
+        border-radius: 14px;
         margin: 0;
     }
+
     #game-screen.game-screen-v2 #stage-btn {
-        margin-top: 10px;
-    }
-    #game-screen.game-screen-v2 .back-btn {
         margin-top: 8px;
-        padding: 10px 16px;
-        font-size: 0.88rem;
+    }
+
+    /* Przycisk powrotu — mniejszy margines i mniejszy padding */
+    #game-screen.game-screen-v2 .back-btn {
+        margin-top: 6px;
+        padding: 12px;
+        font-size: 0.86rem;
     }
 }
 

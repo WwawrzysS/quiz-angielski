@@ -2,4 +2,4 @@
 
 Wersja z dopracowanym ekranem startowym: ranking i karty wyników zostają, usunięto dolną poświatę, przyciski pomocnicze są delikatniejsze.
 
-Oznaczenie wersji: **Quiz v0.3.1**. Zmiany techniczne opisane w `CHANGELOG-QUIZ-v0.1.md`, `CHANGELOG-QUIZ-v0.2.md`, `CHANGELOG-QUIZ-v0.3.md` i `CHANGELOG-QUIZ-v0.3.1.md`.
+Oznaczenie wersji: **Quiz v0.3.2**. Zmiany techniczne opisane w `CHANGELOG-QUIZ-v0.1.md`, `CHANGELOG-QUIZ-v0.2.md`, `CHANGELOG-QUIZ-v0.3.md`, `CHANGELOG-QUIZ-v0.3.1.md` i `CHANGELOG-QUIZ-v0.3.2.md`.
