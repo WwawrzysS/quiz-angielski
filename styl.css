@@ -2313,3 +2313,167 @@ button.wrong {
         transition: none;
     }
 }
+
+/* ==========================================================
+   QUIZ v0.4 — nagrody i XP jak gra
+   Nowa, samodzielna sekcja. Nie modyfikuje żadnej istniejącej
+   reguły .reward-* / .badge-* / .profile-* z poprzednich wersji —
+   wszystko poniżej jest zaczepione o "#game-screen.game-screen-v2"
+   (ekran pytania/nagrody) albo o ".start-screen-v6" (karty profili
+   na ekranie startowym — istniejący, bezpieczny wzorzec z tego
+   projektu: nowa warstwa "na wierzchu" v2-v5, tak jak v6 już robi).
+   ========================================================== */
+
+/* --- Duży puchar nad kartą nagrody.
+   Pojawia się tylko, gdy w karcie pytania jest realnie wstrzyknięta
+   .reward-summary (czyli stage/poziom/lekcja faktycznie ukończone) —
+   wykryte czysto deklaratywnie przez :has(), bez ruszania skrypt.js.
+   Na starszych WebView bez wsparcia :has() ten trójkąt po prostu się
+   nie pojawi (no-op) — reszta karty wygląda normalnie. --- */
+#game-screen.game-screen-v2 .question-box:has(.reward-summary)::before {
+    content: "🏆";
+    display: block;
+    font-size: clamp(2.6rem, 9vw, 3.6rem);
+    line-height: 1;
+    margin-bottom: 2px;
+    filter: drop-shadow(0 8px 14px rgba(217, 119, 6, 0.35));
+    animation: trophyPopV1 0.5s var(--ease-pop) both;
+}
+
+@keyframes trophyPopV1 {
+    0% { transform: scale(0.5) rotate(-8deg); opacity: 0; }
+    60% { transform: scale(1.12) rotate(4deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* --- Karta "🎁 Nagroda za etap" — bardziej kolorowa, jak skrzynka nagród --- */
+#game-screen.game-screen-v2 .reward-summary {
+    margin: 14px 0 4px;
+    padding: 16px 16px 13px;
+    background: linear-gradient(155deg, #fff7e0, #fde68a 55%, #fbbf24);
+    border: 1px solid rgba(217, 119, 6, 0.28);
+    border-radius: 22px;
+    box-shadow: 0 14px 30px rgba(217, 119, 6, 0.20), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    color: #7c2d12;
+}
+
+#game-screen.game-screen-v2 .reward-summary strong {
+    color: #92400e;
+    font-size: 1.04rem;
+}
+
+#game-screen.game-screen-v2 .reward-line {
+    border-bottom: 1px dashed rgba(146, 64, 14, 0.28);
+    align-items: center;
+}
+
+#game-screen.game-screen-v2 .reward-line > span:first-child strong {
+    color: #7c2d12;
+}
+
+/* XP + poziom jako kolorowa plakietka-nagroda, nie szary tekst */
+#game-screen.game-screen-v2 .reward-line > span:last-child {
+    flex-shrink: 0;
+    text-align: center;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #ffffff;
+    padding: 7px 14px;
+    border-radius: 14px;
+    box-shadow: 0 8px 16px rgba(22, 163, 74, 0.32);
+}
+
+#game-screen.game-screen-v2 .reward-line > span:last-child strong {
+    color: #ffffff;
+    font-size: 1.05rem;
+}
+
+#game-screen.game-screen-v2 .reward-line > span:last-child small {
+    color: #ffffff;
+    opacity: 0.92;
+}
+
+/* --- Odznaki — bardziej jak element gry: gradient, połysk, "pop" wejścia --- */
+#game-screen.game-screen-v2 .badge-pill {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border: 1px solid rgba(217, 119, 6, 0.35);
+    color: #92400e;
+    font-weight: 900;
+    box-shadow: 0 6px 14px rgba(217, 119, 6, 0.25);
+    animation: badgePopV1 0.4s var(--ease-pop) both;
+}
+
+@keyframes badgePopV1 {
+    0% { transform: scale(0.7); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+#game-screen.game-screen-v2 .badge-list span:nth-child(2) { animation-delay: 80ms; }
+#game-screen.game-screen-v2 .badge-list span:nth-child(3) { animation-delay: 160ms; }
+
+/* --- Karty profili na ekranie startowym (Poziom/XP/odznaki/streak) —
+   delikatnie bardziej "gamingowe": kolorowy pasek XP, mocniejsze liczby --- */
+.start-screen-v6 .xp-mini-track {
+    height: 10px;
+}
+
+.start-screen-v6 .xp-mini-fill {
+    background: linear-gradient(90deg, #fbbf24, #22c55e, #16a34a);
+    background-size: 220% 100%;
+}
+
+.start-screen-v6 .profile-meta span {
+    font-weight: 900;
+}
+
+/* --- Toast "+XP" po dobrej odpowiedzi (patrz funkcja showXpToast()
+   w skrypt.js — czysto wizualna, nie liczy punktów, tylko odczytuje
+   prawdziwą wartość z getXpPerCorrect()) --- */
+#game-screen.game-screen-v2 .question-box {
+    position: relative;
+}
+
+.xp-toast {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 0.92rem;
+    padding: 6px 12px;
+    border-radius: 999px;
+    box-shadow: 0 8px 18px rgba(22, 163, 74, 0.35);
+    animation: xpToastV1 0.9s ease forwards;
+    pointer-events: none;
+    z-index: 5;
+}
+
+@keyframes xpToastV1 {
+    0% { opacity: 0; transform: translateY(6px) scale(0.85); }
+    20% { opacity: 1; transform: translateY(-2px) scale(1.05); }
+    70% { opacity: 1; transform: translateY(-10px) scale(1); }
+    100% { opacity: 0; transform: translateY(-22px) scale(0.95); }
+}
+
+@media (max-width: 520px) {
+    #game-screen.game-screen-v2 .question-box:has(.reward-summary)::before {
+        font-size: clamp(2.2rem, 11vw, 2.8rem);
+    }
+    #game-screen.game-screen-v2 .reward-summary {
+        padding: 13px 13px 11px;
+    }
+    .xp-toast {
+        top: 6px;
+        right: 10px;
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #game-screen.game-screen-v2 .question-box:has(.reward-summary)::before,
+    #game-screen.game-screen-v2 .badge-pill,
+    .xp-toast {
+        animation: none;
+    }
+}

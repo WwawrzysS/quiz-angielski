@@ -491,6 +491,24 @@
             if (!stageStats[player]) stageStats[player] = { correct: 0, wrong: 0 };
             stageStats[player].correct++;
             reduceDifficultWordForPlayer(player, currentWord);
+            showXpToast();
+        }
+
+        // --- QUIZ v0.4: czysto wizualny toast "+XP" po dobrej odpowiedzi ---
+        // Nie liczy ani nie zmienia żadnego XP — tylko ODCZYTUJE wartość
+        // z istniejącej funkcji getXpPerCorrect() (tej samej, którą realnie
+        // używa applyStageRewards() do naliczenia punktów na koniec etapu),
+        // żeby liczba na toaście była prawdziwa, a nie zgadywana.
+        function showXpToast() {
+            const questionBox = document.querySelector("#game-screen .question-box");
+            if (!questionBox) return;
+            const amount = getXpPerCorrect();
+            const toast = document.createElement("div");
+            toast.className = "xp-toast";
+            toast.setAttribute("aria-hidden", "true");
+            toast.textContent = `+${amount} XP`;
+            questionBox.appendChild(toast);
+            setTimeout(() => toast.remove(), 900);
         }
 
         function recordWrongAnswer(player) {
