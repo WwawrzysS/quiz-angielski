@@ -2216,19 +2216,59 @@ button.wrong {
     color: #0f4778;
 }
 
-@media (max-width: 480px) {
-    #game-screen.game-screen-v2 .question-box {
-        padding: 22px 16px 24px;
-        min-height: 160px;
+/* ==========================================================
+   QUIZ v0.3.1 — HOTFIX: kompaktowy ekran pytania na telefonie
+   Problem: karta pytania, czcionka pytania i odstępy były za duże —
+   dół ekranu (4. odpowiedź / przycisk powrotu) uciekał poza widok.
+   Poniższy blok zastępuje poprzedni, mniej agresywny @media (max-width:480px)
+   dla #game-screen.game-screen-v2 — zero zmian w skrypt.js, zero zmian
+   w display elementów przełączanych przez JS (#options-container zostaje
+   "grid"/"none", #stage-progress-card zostaje "block"/"none").
+   Na desktopie/tablecie (>520px) zostają większe wartości z v0.3.
+   ========================================================== */
+@media (max-width: 520px) {
+    #game-screen.game-screen-v2 .progress-card {
+        padding: 11px 14px;
+        margin-bottom: 8px;
     }
-    #game-screen.game-screen-v2 #options-container .btn {
-        padding: 16px 16px;
-        font-size: 1rem;
+    #game-screen.game-screen-v2 .progress-track {
+        height: 12px;
+    }
+    #game-screen.game-screen-v2 .question-box {
+        padding: 18px 16px 20px;
+        margin: 4px 0 8px;
+        min-height: auto;
+    }
+    #game-screen.game-screen-v2 .context-title {
+        font-size: 0.88rem;
+        margin-bottom: 6px;
+    }
+    #game-screen.game-screen-v2 .main-question-text {
+        font-size: clamp(1.6rem, 7.5vw, 2.3rem);
+        line-height: 1.12;
     }
     #game-screen.game-screen-v2 .speaker-btn {
-        width: 54px;
-        height: 54px;
-        font-size: 22px;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    #game-screen.game-screen-v2 #options-container {
+        margin-top: 8px;
+        gap: 12px;
+    }
+    #game-screen.game-screen-v2 #options-container .btn {
+        padding: 14px 16px;
+        font-size: 0.96rem;
+        border-radius: 16px;
+        margin: 0;
+    }
+    #game-screen.game-screen-v2 #stage-btn {
+        margin-top: 10px;
+    }
+    #game-screen.game-screen-v2 .back-btn {
+        margin-top: 8px;
+        padding: 10px 16px;
+        font-size: 0.88rem;
     }
 }
 
